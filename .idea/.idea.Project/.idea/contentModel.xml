@@ -12,6 +12,7 @@
       <e p="bundleconfig.json" t="Include" />
       <e p="Controllers" t="Include">
         <e p="HomeController.cs" t="Include" />
+        <e p="UploadController.cs" t="Include" />
       </e>
       <e p="LICENSE" t="Include" />
       <e p="Models" t="Include">
@@ -54,10 +55,12 @@
         <e p="Home" t="Include">
           <e p="About.cshtml" t="Include" />
           <e p="Contact.cshtml" t="Include" />
+          <e p="Files.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
         </e>
         <e p="Shared" t="Include">
           <e p="_Layout.cshtml" t="Include" />
+          <e p="_UploadForm.cshtml" t="Include" />
           <e p="_ValidationScriptsPartial.cshtml" t="Include" />
           <e p="Error.cshtml" t="Include" />
         </e>

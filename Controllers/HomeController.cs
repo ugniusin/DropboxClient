@@ -20,6 +20,14 @@ namespace Project.Controllers
             return View();
         }
         
+        public IActionResult Files()
+        {   
+            ViewData["Message"] = "Your application description page.";
+            ViewData["Folders"] =  _serviceInterface.ListRootFolder();
+            
+            return View();
+        }
+        
         public IActionResult About()
         {   
             ViewData["Message"] = "Your application description page." + _serviceInterface.DropBoxInfo();

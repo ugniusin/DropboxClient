@@ -1,0 +1,40 @@
+﻿<form name="form1" method="post" enctype="multipart/form-data" action="/Upload/Save">
+    <div>
+        <label for="filename">Filename</label>
+        <input name="filename" type="text" />
+    </div>
+    <div>
+        <label for="file">File</label>
+        <input name="file" type="file" />
+    </div>
+    <br>
+    <div>
+        <a class="btn btn-sm btn-default" onclick="fileUpload()">Submit</a>
+    </div>
+</form>
+
+@*@using
+{
+  void SubmitButton_Click(Object sender, EventArgs e) {
+        if (File1.PostedFile != null) {
+            try {
+                File1.PostedFile.SaveAs("C:\\Uploads\\uploadedfile.txt");
+                Span1.InnerHtml = "Upload Successful!";
+            }
+            catch (Exception ex) {
+                Span1.InnerHtml = "Error saving file <b>C:\\" +
+                    File1.Value + "</b><br>" + ex.ToString();
+            }
+        }
+    } 
+}
+
+<form runat="server" enctype="multipart/form-data">
+    Select a file to upload:<br />
+    <input type="file" id="File1" runat="Server">
+    <p>
+    <input type="submit" id="Submit1" runat="Server" 
+           value="Upload File" OnServerClick="SubmitButton_Click">
+    <p>
+    <span id="Span1" runat="Server" />
+</form>*@
