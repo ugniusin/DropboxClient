@@ -1,4 +1,5 @@
-﻿using Project.Source.Domain;
+﻿using System;
+using Project.Source.Domain;
 using Project.Source.AntiCorruption;
 
 namespace Project.Source.Infrastructure
@@ -12,7 +13,7 @@ namespace Project.Source.Infrastructure
             _dropboxFileUploader = dropboxFileUploader;
         }
         
-        public async void Upload(string folder, string file, string content)
+        public async void Upload(string folder, string file, byte[] content)
         {
             await _dropboxFileUploader.Upload(folder, file, content);
         }

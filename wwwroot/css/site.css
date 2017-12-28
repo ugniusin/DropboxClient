@@ -33,3 +33,52 @@
         display: none;
     }
 }
+
+/* Dropzone styles */
+.dropzone {
+    padding: 20px;
+    margin: 10px;
+    background: #6A7F93;
+    color: #fff;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1.3em;
+    border: 2px dashed #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px #6A7F93, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+    text-shadow: -1px -1px #566c93;
+    font-weight: normal;
+}
+
+.dz-drag-hover {
+    background: #7d95ad;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background: none;
+    text-shadow: none;
+}
+
+.dropzone a {
+    color: black;
+}
+
+.upload-button {
+    margin: 10px 0;
+    min-width: 140px;
+    background: #fff;
+    color: #6A7F93;
+    font-size: 14pt;
+    border: 2px solid #6A7F93;
+    border-radius: 10px;
+    position: relative;
+    bottom: 0;
+}
+
+.upload-button:hover {
+    background: #f1f1f1;
+}
+
+.upload-button:active {
+    background: #e4e4e4;
+}

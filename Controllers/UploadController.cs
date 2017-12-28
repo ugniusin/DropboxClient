@@ -1,35 +1,36 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Project.Source.Domain;
-using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace Project.Controllers
 {
     public class UploadController : Controller
     {
         private readonly DataProviderInterface _dataProvider;
+        private readonly FileUploaderInterface _fileUploader;
 
-        public UploadController(DataProviderInterface dataProvider)
+        public UploadController(DataProviderInterface dataProvider, FileUploaderInterface fileUploader)
         {
             _dataProvider = dataProvider;
+            _fileUploader = fileUploader;
         }
         
-        public void Save()
+        [HttpPost]
+        public IActionResult UploadFile(IFormFile file)
         {
-            var filename = Request.Form["filename"].ToString();
-            /*
-            foreach (string file in Request.Files)
+            if (file.Length > 0)
             {
-                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
-                if (hpf.ContentLength == 0)
-                    continue;
-                string savedFileName = Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory, 
-                    Path.GetFileName(hpf.FileName));
-
-                
-            }*/
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    byte[] fileBytes = ms.ToArray();
+                        
+                    _fileUploader.Upload("", file.FileName, fileBytes);
+                }
+            }
+            
+            return Ok();
         }
     }
 }

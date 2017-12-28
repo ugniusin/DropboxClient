@@ -2,6 +2,6 @@
 {
     public interface FileUploaderInterface
     {
-        void Upload(string folder, string file, string content);
+        void Upload(string folder, string file, byte[] content);
     }
 }

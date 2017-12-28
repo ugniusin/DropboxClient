@@ -84,6 +84,8 @@
         <e p="lib" t="Include">
           <e p="bootstrap" t="Include">
             <e p=".bower.json" t="Include" />
+            <e p="bower.json" t="Include" />
+            <e p="CHANGELOG.md" t="Include" />
             <e p="dist" t="Include">
               <e p="css" t="Include">
                 <e p="bootstrap-theme.css" t="Include" />
@@ -108,7 +110,182 @@
                 <e p="npm.js" t="Include" />
               </e>
             </e>
+            <e p="fonts" t="Include">
+              <e p="glyphicons-halflings-regular.eot" t="Include" />
+              <e p="glyphicons-halflings-regular.svg" t="Include" />
+              <e p="glyphicons-halflings-regular.ttf" t="Include" />
+              <e p="glyphicons-halflings-regular.woff" t="Include" />
+              <e p="glyphicons-halflings-regular.woff2" t="Include" />
+            </e>
+            <e p="Gemfile" t="Include" />
+            <e p="Gemfile.lock" t="Include" />
+            <e p="grunt" t="Include">
+              <e p=".jshintrc" t="Include" />
+              <e p="bs-commonjs-generator.js" t="Include" />
+              <e p="bs-glyphicons-data-generator.js" t="Include" />
+              <e p="bs-lessdoc-parser.js" t="Include" />
+              <e p="bs-raw-files-generator.js" t="Include" />
+              <e p="change-version.js" t="Include" />
+              <e p="configBridge.json" t="Include" />
+              <e p="npm-shrinkwrap.json" t="Include" />
+              <e p="sauce_browsers.yml" t="Include" />
+            </e>
+            <e p="Gruntfile.js" t="Include" />
+            <e p="ISSUE_TEMPLATE.md" t="Include" />
+            <e p="js" t="Include">
+              <e p=".jscsrc" t="Include" />
+              <e p=".jshintrc" t="Include" />
+              <e p="affix.js" t="Include" />
+              <e p="alert.js" t="Include" />
+              <e p="button.js" t="Include" />
+              <e p="carousel.js" t="Include" />
+              <e p="collapse.js" t="Include" />
+              <e p="dropdown.js" t="Include" />
+              <e p="modal.js" t="Include" />
+              <e p="popover.js" t="Include" />
+              <e p="scrollspy.js" t="Include" />
+              <e p="tab.js" t="Include" />
+              <e p="tooltip.js" t="Include" />
+              <e p="transition.js" t="Include" />
+            </e>
+            <e p="less" t="Include">
+              <e p=".csscomb.json" t="Include" />
+              <e p=".csslintrc" t="Include" />
+              <e p="alerts.less" t="Include" />
+              <e p="badges.less" t="Include" />
+              <e p="bootstrap.less" t="Include" />
+              <e p="breadcrumbs.less" t="Include" />
+              <e p="button-groups.less" t="Include" />
+              <e p="buttons.less" t="Include" />
+              <e p="carousel.less" t="Include" />
+              <e p="close.less" t="Include" />
+              <e p="code.less" t="Include" />
+              <e p="component-animations.less" t="Include" />
+              <e p="dropdowns.less" t="Include" />
+              <e p="forms.less" t="Include" />
+              <e p="glyphicons.less" t="Include" />
+              <e p="grid.less" t="Include" />
+              <e p="input-groups.less" t="Include" />
+              <e p="jumbotron.less" t="Include" />
+              <e p="labels.less" t="Include" />
+              <e p="list-group.less" t="Include" />
+              <e p="media.less" t="Include" />
+              <e p="mixins" t="Include">
+                <e p="alerts.less" t="Include" />
+                <e p="background-variant.less" t="Include" />
+                <e p="border-radius.less" t="Include" />
+                <e p="buttons.less" t="Include" />
+                <e p="center-block.less" t="Include" />
+                <e p="clearfix.less" t="Include" />
+                <e p="forms.less" t="Include" />
+                <e p="gradients.less" t="Include" />
+                <e p="grid-framework.less" t="Include" />
+                <e p="grid.less" t="Include" />
+                <e p="hide-text.less" t="Include" />
+                <e p="image.less" t="Include" />
+                <e p="labels.less" t="Include" />
+                <e p="list-group.less" t="Include" />
+                <e p="nav-divider.less" t="Include" />
+                <e p="nav-vertical-align.less" t="Include" />
+                <e p="opacity.less" t="Include" />
+                <e p="pagination.less" t="Include" />
+                <e p="panels.less" t="Include" />
+                <e p="progress-bar.less" t="Include" />
+                <e p="reset-filter.less" t="Include" />
+                <e p="reset-text.less" t="Include" />
+                <e p="resize.less" t="Include" />
+                <e p="responsive-visibility.less" t="Include" />
+                <e p="size.less" t="Include" />
+                <e p="tab-focus.less" t="Include" />
+                <e p="table-row.less" t="Include" />
+                <e p="text-emphasis.less" t="Include" />
+                <e p="text-overflow.less" t="Include" />
+                <e p="vendor-prefixes.less" t="Include" />
+              </e>
+              <e p="mixins.less" t="Include" />
+              <e p="modals.less" t="Include" />
+              <e p="navbar.less" t="Include" />
+              <e p="navs.less" t="Include" />
+              <e p="normalize.less" t="Include" />
+              <e p="pager.less" t="Include" />
+              <e p="pagination.less" t="Include" />
+              <e p="panels.less" t="Include" />
+              <e p="popovers.less" t="Include" />
+              <e p="print.less" t="Include" />
+              <e p="progress-bars.less" t="Include" />
+              <e p="responsive-embed.less" t="Include" />
+              <e p="responsive-utilities.less" t="Include" />
+              <e p="scaffolding.less" t="Include" />
+              <e p="tables.less" t="Include" />
+              <e p="theme.less" t="Include" />
+              <e p="thumbnails.less" t="Include" />
+              <e p="tooltip.less" t="Include" />
+              <e p="type.less" t="Include" />
+              <e p="utilities.less" t="Include" />
+              <e p="variables.less" t="Include" />
+              <e p="wells.less" t="Include" />
+            </e>
             <e p="LICENSE" t="Include" />
+            <e p="NuGet" t="Include">
+              <e p="bootstrap.less.nuspec" t="Include" />
+              <e p="bootstrap.nuspec" t="Include" />
+              <e p="MyGet.ps1" t="Include" />
+            </e>
+            <e p="package.js" t="Include" />
+            <e p="package.json" t="Include" />
+            <e p="README.md" t="Include" />
+          </e>
+          <e p="bootstrap-treeview" t="Include">
+            <e p=".bower.json" t="Include" />
+            <e p="app.js" t="Include" />
+            <e p="bower.json" t="Include" />
+            <e p="CHANGELOG.md" t="Include" />
+            <e p="dist" t="Include">
+              <e p="bootstrap-treeview.min.css" t="Include" />
+              <e p="bootstrap-treeview.min.js" t="Include" />
+            </e>
+            <e p="Gruntfile.js" t="Include" />
+            <e p="LICENSE" t="Include" />
+            <e p="package.json" t="Include" />
+            <e p="public" t="Include">
+              <e p="css" t="Include">
+                <e p="bootstrap-treeview.css" t="Include" />
+              </e>
+              <e p="example-dom.html" t="Include" />
+              <e p="index.html" t="Include" />
+              <e p="js" t="Include">
+                <e p="bootstrap-treeview.js" t="Include" />
+              </e>
+            </e>
+            <e p="README.md" t="Include" />
+            <e p="screenshot" t="Include">
+              <e p="default.PNG" t="Include" />
+            </e>
+            <e p="src" t="Include">
+              <e p="css" t="Include">
+                <e p="bootstrap-treeview.css" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="bootstrap-treeview.js" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="dropzone" t="Include">
+            <e p=".bower.json" t="Include" />
+            <e p="bower.json" t="Include" />
+            <e p="dist" t="Include">
+              <e p="basic.css" t="Include" />
+              <e p="dropzone-amd-module.js" t="Include" />
+              <e p="dropzone.css" t="Include" />
+              <e p="dropzone.js" t="Include" />
+              <e p="min" t="Include">
+                <e p="basic.min.css" t="Include" />
+                <e p="dropzone-amd-module.min.js" t="Include" />
+                <e p="dropzone.min.css" t="Include" />
+                <e p="dropzone.min.js" t="Include" />
+              </e>
+              <e p="README.md" t="Include" />
+            </e>
           </e>
           <e p="jquery" t="Include">
             <e p=".bower.json" t="Include" />

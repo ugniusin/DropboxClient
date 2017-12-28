@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Dropbox.Api;
 using Dropbox.Api.Files;
@@ -14,10 +13,10 @@ namespace Project.Source.AntiCorruption
         {
             _dropboxClient = dropboxClient;
         }
-       
-        public async Task Upload(string folder, string file, string content)
+        
+        public async Task Upload(string folder, string file, byte[] content)
         {
-            using (var mem = new MemoryStream(Encoding.UTF8.GetBytes(content)))
+            using (var mem = new MemoryStream(content))
             {
                 var updated = await _dropboxClient.Files.UploadAsync(
                     folder + "/" + file,
