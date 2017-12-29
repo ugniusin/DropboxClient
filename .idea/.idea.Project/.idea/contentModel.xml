@@ -39,6 +39,13 @@
           <e p="DropboxDataProvider.cs" t="Include" />
           <e p="DropboxFileUploader.cs" t="Include" />
         </e>
+        <e p="Application" t="Include">
+          <e p="DTO" t="Include">
+            <e p="File.cs" t="Include" />
+            <e p="Folder.cs" t="Include" />
+            <e p="IFileSystemNode.cs" t="Include" />
+          </e>
+        </e>
         <e p="Domain" t="Include">
           <e p="DataProviderInterface.cs" t="Include" />
           <e p="FileUploaderInterface.cs" t="Include" />

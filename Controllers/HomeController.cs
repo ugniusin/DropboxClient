@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project.Models;
+using Project.Source.Application.DTO;
 using Project.Source.Domain;
 
 namespace Project.Controllers
@@ -23,9 +26,22 @@ namespace Project.Controllers
         public IActionResult Files()
         {   
             ViewData["Message"] = "Your application description page.";
-            ViewData["Folders"] =  _serviceInterface.ListRootFolder();
+            ViewData["Folders"] =  _serviceInterface.ListFolder("");
+            ViewData["Files"] =  _serviceInterface.ListFiles("");
             
             return View();
+        }
+        
+        public JsonResult ListFoldersAndFiles(string path)
+        {
+            List<Folder> folders = _serviceInterface.ListFolder(path ?? "");
+            List<File> files = _serviceInterface.ListFiles(path ?? "");
+            
+            List<IFileSystemNode> result = folders.Concat<IFileSystemNode>(files).ToList();
+            
+            result.Sort((x, y) => x.GetTitle().CompareTo(y.GetTitle()));
+           
+            return Json(result);
         }
         
         public IActionResult About()
@@ -40,11 +56,10 @@ namespace Project.Controllers
             ViewBag.SyncOrAsync = "Asynchronous";
             ViewData["Message"] = "Your contact page.";
             
-            foreach (var directory in _serviceInterface.ListRootFolder())
+            foreach (var directory in _serviceInterface.ListFolder(""))
             {
                 ViewData["Message"] += "\n" + directory;
             }
-           
 
             return View();
         }

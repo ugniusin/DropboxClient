@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dropbox.Api;
-using Dropbox.Api.Files;
+using Project.Source.Application.DTO;
 
 namespace Project.Source.AntiCorruption
 {
@@ -21,21 +21,33 @@ namespace Project.Source.AntiCorruption
         public async Task<string> DropBoxInfo()
         {
             var full = await _dropboxClient.Users.GetCurrentAccountAsync();
-            return "{0} - {1}" + full.Name.DisplayName + full.Email;
+            return full.Name.DisplayName + full.Email;
         }
         
-        public async Task<List<string>> ListRootFolder()
+        public async Task<List<Folder>> ListFolder(string path)
         {
-            var list = await _dropboxClient.Files.ListFolderAsync("");
+            var list = await _dropboxClient.Files.ListFolderAsync(path);
 
-            // show folders then files
-            List<string> folders = new List<string>();
+            List<Folder> folders = new List<Folder>();
             
             foreach (var item in list.Entries.Where(i => i.IsFolder)) {
-                folders.Add(item.Name);
+                folders.Add(new Folder(item.Name, path));
             }
 
             return folders;
+        }
+        
+        public async Task<List<Application.DTO.File>> ListFiles(string path)
+        {
+            var list = await _dropboxClient.Files.ListFolderAsync(path);
+
+            List<Application.DTO.File> files = new List<Application.DTO.File>();
+            
+            foreach (var item in list.Entries.Where(i => i.IsFile)) {
+                files.Add(new Application.DTO.File(item.Name, path));
+            }
+
+            return files;
         }
     }
 }
