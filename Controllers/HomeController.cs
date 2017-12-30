@@ -10,11 +10,11 @@ namespace Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDataProvider _serviceInterface;
+        private readonly IDataProvider _dataProvider;
 
-        public HomeController(IDataProvider serviceInterface)
+        public HomeController(IDataProvider dataProvider)
         {
-            _serviceInterface = serviceInterface;
+            _dataProvider = dataProvider;
         }
 
         public IActionResult Index()
@@ -32,17 +32,16 @@ namespace Project.Controllers
         public IActionResult Files()
         {   
             ViewData["Message"] = "Your application description page.";
-            ViewData["Folders"] =  _serviceInterface.ListFolder("");
-            ViewData["Files"] =  _serviceInterface.ListFiles("");
+            ViewData["Folders"] =  _dataProvider.ListFolder("");
+            ViewData["Files"] =  _dataProvider.ListFiles("");
             
             return View();
         }
         
         public JsonResult ListFoldersAndFiles(string path)
         {
-            List<Folder> folders = _serviceInterface.ListFolder(path ?? "");
-            List<File> files = _serviceInterface.ListFiles(path ?? "");
-            
+            List<Folder> folders = _dataProvider.ListFolder(path ?? "");
+            List<File> files = _dataProvider.ListFiles(path ?? "");
             List<IFileSystemNode> result = folders.Concat<IFileSystemNode>(files).ToList();
             
             result.Sort((x, y) => x.GetTitle().CompareTo(y.GetTitle()));

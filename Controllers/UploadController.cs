@@ -7,13 +7,11 @@ namespace Project.Controllers
 {
     public class UploadController : Controller
     {
-        private readonly IDataProvider _dataProvider;
-        private readonly IFileUploader _fileUploader;
+        private readonly IFileManager _fileManager;
 
-        public UploadController(IDataProvider dataProvider, IFileUploader fileUploader)
+        public UploadController(IFileManager fileManager)
         {
-            _dataProvider = dataProvider;
-            _fileUploader = fileUploader;
+            _fileManager = fileManager;
         }
         
         [HttpPost]
@@ -26,11 +24,21 @@ namespace Project.Controllers
                     file.CopyTo(ms);
                     byte[] fileBytes = ms.ToArray();
                         
-                    _fileUploader.Upload("", file.FileName, fileBytes);
+                    _fileManager.Upload("", file.FileName, fileBytes);
                 }
             }
             
             return Ok();
+        }
+        
+        [HttpGet]
+        public IActionResult DownloadFile(string path, string fileName)
+        {
+            byte[] fileBytes = _fileManager.Download(path, fileName);
+            
+            var content = new MemoryStream(fileBytes);
+            var contentType = "application/octet-stream";
+            return File(content, contentType, fileName);
         }
     }
 }

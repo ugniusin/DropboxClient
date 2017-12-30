@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 using Project.Source.Infrastructure;
 using Project.Source.Domain;
 using Project.Source.AntiCorruption;
@@ -28,9 +27,9 @@ namespace Project
                 new DropboxClient("eChWowI7hUYAAAAAAAAgtGRtv1XnZTldjnQSRVU7ZDBm8IFPOfwvtAe1B4xeNuJT");
             
             services.AddTransient<DropboxDataProvider>(s => new DropboxDataProvider(dropboxClient));
-            services.AddTransient<DropboxFileUploader>(s => new DropboxFileUploader(dropboxClient));
+            services.AddTransient<DropboxFileManager>(s => new DropboxFileManager(dropboxClient));
             services.AddTransient<IDataProvider, DataProvider>();
-            services.AddTransient<IFileUploader, FileUploader>();
+            services.AddTransient<IFileManager, FileManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

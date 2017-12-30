@@ -1,6 +1,4 @@
-﻿// Write your JavaScript code.
-
-$(function() {
+﻿$(function() {
     Dropzone.options.fileUploadForm = {
         autoProcessQueue: false,
         maxFilesize: 5,
@@ -81,18 +79,23 @@ function generateListHtml(response, depth)
             '" data-depth="' + depth +
             '">';
 
-        if (object.type == 'folder') {
+        if (object.type === 'folder') {
             list += '<div class="folder-node glyphicon glyphicon-folder-close text-right" style="width: ' +
                 padding + 'px;" data-status="' + 'closed' + '"></div>';
         } else {
             list += '<div class="file-node glyphicon" style="width: ' + padding + 'px;"></div>';
         }
+        
+        list += '<span class="icon node-icon"></span>' + object.title;
 
-        list += '<span class="icon node-icon"></span>' + object.title + '</li>';
+        if (object.type === 'file') {
+            var downloadUrl = '/Upload/DownloadFile?' + $.param({path: object.path, fileName: object.title});
+            list += '<a class="pull-right" href="' + downloadUrl + '">Download</a>';
+        }
+
+        list += '</li>';
     });
 
-    list += '';
-    
     return list;
 }
 
