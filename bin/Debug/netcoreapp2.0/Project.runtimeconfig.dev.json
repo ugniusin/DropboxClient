@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/Users/ugnius/.dotnet/store/|arch|/|tfm|",
-      "/Users/ugnius/.nuget/packages"
-    ]
-  }
-}
