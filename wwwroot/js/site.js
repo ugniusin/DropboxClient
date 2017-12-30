@@ -33,28 +33,41 @@ $(function() {
         tree.html("<ul>" + list + "</ul>");
     });
 
-    tree.on('click', '.folder-node', function(element) {
+    letToOpenFolder(tree);
+});
+
+function openFolder(tree, folderElement, icon) {
+    tree.off('click', '.folder-node');
+   
+    var destinationPath = folderElement.data("path") + '/' + folderElement.data("title");
+
+    if (icon.data('status') === 'closed') {
+        icon.data('status', 'opened');
+        icon.addClass('glyphicon-folder-open').removeClass('glyphicon-folder-close');
+
+        getFileSystem(destinationPath, function (response) {
+            //drawTree(response);
+            var list = generateListHtml(response, folderElement.data("depth") + 1);
+            folderElement.after(list);
+
+            letToOpenFolder(tree);
+        })
+    } else if (icon.data('status') === 'opened') {
+        icon.data('status', 'closed');
+        icon.addClass('glyphicon-folder-close').removeClass('glyphicon-folder-open');
+        $('li[data-path^="' + destinationPath + '"]').remove();
+
+        letToOpenFolder(tree);
+    }
+}
+
+function letToOpenFolder(tree) {
+    tree.on('click', '.folder-node', function () {
         var folderElement = $(this).closest('li');
         var icon = $(this);
-        
-        var destinationPath = folderElement.data("path") + '/' + folderElement.data("title");
-        
-        if (icon.data('status') === 'closed') {
-            icon.data('status', 'opened');
-            icon.addClass('glyphicon-folder-open').removeClass('glyphicon-folder-close');
-            
-            getFileSystem(destinationPath, function (response) {
-                //drawTree(response);
-                var list = generateListHtml(response, folderElement.data("depth") + 1);
-                folderElement.after(list);
-            })
-        } else if (icon.data('status') === 'opened') {
-            icon.data('status', 'closed');
-            icon.addClass('glyphicon-folder-close').removeClass('glyphicon-folder-open');
-            $('li[data-path^="' + destinationPath + '"]').remove();
-        }
+        openFolder(tree, folderElement, icon);
     });
-});
+}
 
 function generateListHtml(response, depth)
 {
@@ -70,9 +83,9 @@ function generateListHtml(response, depth)
 
         if (object.type == 'folder') {
             list += '<div class="folder-node glyphicon glyphicon-folder-close text-right" style="width: ' +
-                padding + 'px; margin-right:10px;" data-status="' + 'closed' + '"></div>';
+                padding + 'px; margin-right:15px;" data-status="' + 'closed' + '"></div>';
         } else {
-            list += '<div class="glyphicon" style="width: ' + padding + 'px; margin-right:10px;"></div>';
+            list += '<div class="glyphicon" style="width: ' + padding + 'px; margin-right:15px;"></div>';
         }
 
         list += '<span class="icon node-icon"></span>' + object.title + '</li>';
@@ -82,7 +95,6 @@ function generateListHtml(response, depth)
     
     return list;
 }
-
 
 function makeTree(tree, response) {
     
