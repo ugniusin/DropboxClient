@@ -31,7 +31,7 @@ $(function() {
     getFileSystem("", function (response) {
         var list = generateListHtml(response, 1);
         tree.html("<ul>" + list + "</ul>");
-    });
+    }, function () {});
 
     letToOpenFolder(tree);
 });
@@ -49,9 +49,9 @@ function openFolder(tree, folderElement, icon) {
             //drawTree(response);
             var list = generateListHtml(response, folderElement.data("depth") + 1);
             folderElement.after(list);
-
+        }, function () {
             letToOpenFolder(tree);
-        })
+        });
     } else if (icon.data('status') === 'opened') {
         icon.data('status', 'closed');
         icon.addClass('glyphicon-folder-close').removeClass('glyphicon-folder-open');
@@ -83,9 +83,9 @@ function generateListHtml(response, depth)
 
         if (object.type == 'folder') {
             list += '<div class="folder-node glyphicon glyphicon-folder-close text-right" style="width: ' +
-                padding + 'px; margin-right:15px;" data-status="' + 'closed' + '"></div>';
+                padding + 'px;" data-status="' + 'closed' + '"></div>';
         } else {
-            list += '<div class="glyphicon" style="width: ' + padding + 'px; margin-right:15px;"></div>';
+            list += '<div class="file-node glyphicon" style="width: ' + padding + 'px;"></div>';
         }
 
         list += '<span class="icon node-icon"></span>' + object.title + '</li>';
@@ -99,12 +99,11 @@ function generateListHtml(response, depth)
 function makeTree(tree, response) {
     
     $.each(response, function(key, object) {
-
-        if (object.type == 'file') {
+        if (object.type === 'file') {
             tree.push({
                 text: object.title
             });
-        } else if (object.type == 'folder') {
+        } else if (object.type === 'folder') {
             tree.push({
                 text: object.title,
                 nodes: makeTree([], object.items)
@@ -115,7 +114,7 @@ function makeTree(tree, response) {
     return tree;
 }
 
-function getFileSystem(path, drawTree) {
+function getFileSystem(path, drawTree, letToOpenFolder) {
 
     $.ajax({
         url: '/Home/ListFoldersAndFiles',
@@ -123,10 +122,10 @@ function getFileSystem(path, drawTree) {
         data: { path : path },
         dataType: 'json',
         success: function (data) {
-
             drawTree(data);
-            
-            return data;
+        },
+        complete: function(tree) {
+            letToOpenFolder(tree);
         }
     });
 }

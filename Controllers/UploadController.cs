@@ -7,10 +7,10 @@ namespace Project.Controllers
 {
     public class UploadController : Controller
     {
-        private readonly DataProviderInterface _dataProvider;
-        private readonly FileUploaderInterface _fileUploader;
+        private readonly IDataProvider _dataProvider;
+        private readonly IFileUploader _fileUploader;
 
-        public UploadController(DataProviderInterface dataProvider, FileUploaderInterface fileUploader)
+        public UploadController(IDataProvider dataProvider, IFileUploader fileUploader)
         {
             _dataProvider = dataProvider;
             _fileUploader = fileUploader;

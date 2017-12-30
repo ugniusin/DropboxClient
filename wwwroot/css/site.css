@@ -82,3 +82,12 @@
 .upload-button:active {
     background: #e4e4e4;
 }
+
+.folder-node {
+    cursor: pointer;
+}
+
+.folder-node,
+.file-node {
+    margin-right:15px;
+}

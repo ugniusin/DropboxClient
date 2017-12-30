@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Project.Source.Domain;
 using Project.Source.AntiCorruption;
 using Project.Source.Application.DTO;
 
 namespace Project.Source.Infrastructure
 {
-    public class DataProvider : DataProviderInterface
+    public class DataProvider : IDataProvider
     {
         private readonly DropboxDataProvider _dropboxDataProvider;
         

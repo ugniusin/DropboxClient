@@ -1,6 +1,6 @@
 ﻿namespace Project.Source.Domain
 {
-    public interface FileUploaderInterface
+    public interface IFileUploader
     {
         void Upload(string folder, string file, byte[] content);
     }

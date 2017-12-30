@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dropbox.Api;
+﻿using Dropbox.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Project.Source;
 
 using Project.Source.Infrastructure;
 using Project.Source.Domain;
@@ -34,8 +29,8 @@ namespace Project
             
             services.AddTransient<DropboxDataProvider>(s => new DropboxDataProvider(dropboxClient));
             services.AddTransient<DropboxFileUploader>(s => new DropboxFileUploader(dropboxClient));
-            services.AddTransient<DataProviderInterface, DataProvider>();
-            services.AddTransient<FileUploaderInterface, FileUploader>();
+            services.AddTransient<IDataProvider, DataProvider>();
+            services.AddTransient<IFileUploader, FileUploader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +51,7 @@ namespace Project
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}");
             });
         }
     }

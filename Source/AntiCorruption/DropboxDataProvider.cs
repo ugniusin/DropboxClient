@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dropbox.Api;
 using Project.Source.Application.DTO;
@@ -37,14 +34,14 @@ namespace Project.Source.AntiCorruption
             return folders;
         }
         
-        public async Task<List<Application.DTO.File>> ListFiles(string path)
+        public async Task<List<File>> ListFiles(string path)
         {
             var list = await _dropboxClient.Files.ListFolderAsync(path);
 
-            List<Application.DTO.File> files = new List<Application.DTO.File>();
+            List<File> files = new List<File>();
             
             foreach (var item in list.Entries.Where(i => i.IsFile)) {
-                files.Add(new Application.DTO.File(item.Name, path));
+                files.Add(new File(item.Name, path));
             }
 
             return files;

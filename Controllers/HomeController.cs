@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project.Models;
 using Project.Source.Application.DTO;
@@ -11,9 +10,9 @@ namespace Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DataProviderInterface _serviceInterface;
+        private readonly IDataProvider _serviceInterface;
 
-        public HomeController(DataProviderInterface serviceInterface)
+        public HomeController(IDataProvider serviceInterface)
         {
             _serviceInterface = serviceInterface;
         }
@@ -23,6 +22,13 @@ namespace Project.Controllers
             return View();
         }
         
+        [Route("FileUpload")]
+        public IActionResult FileUpload()
+        {
+            return View();
+        }
+        
+        [Route("Files")]
         public IActionResult Files()
         {   
             ViewData["Message"] = "Your application description page.";
@@ -42,26 +48,6 @@ namespace Project.Controllers
             result.Sort((x, y) => x.GetTitle().CompareTo(y.GetTitle()));
            
             return Json(result);
-        }
-        
-        public IActionResult About()
-        {   
-            ViewData["Message"] = "Your application description page." + _serviceInterface.DropBoxInfo();
-            
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewBag.SyncOrAsync = "Asynchronous";
-            ViewData["Message"] = "Your contact page.";
-            
-            foreach (var directory in _serviceInterface.ListFolder(""))
-            {
-                ViewData["Message"] += "\n" + directory;
-            }
-
-            return View();
         }
 
         public IActionResult Error()

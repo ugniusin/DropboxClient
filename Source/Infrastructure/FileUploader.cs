@@ -1,10 +1,9 @@
-﻿using System;
-using Project.Source.Domain;
+﻿using Project.Source.Domain;
 using Project.Source.AntiCorruption;
 
 namespace Project.Source.Infrastructure
 {
-    public class FileUploader : FileUploaderInterface
+    public class FileUploader : IFileUploader
     {
         private readonly DropboxFileUploader _dropboxFileUploader;
         

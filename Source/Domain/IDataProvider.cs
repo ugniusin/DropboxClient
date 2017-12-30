@@ -3,7 +3,7 @@ using Project.Source.Application.DTO;
 
 namespace Project.Source.Domain
 {
-    public interface DataProviderInterface
+    public interface IDataProvider
     {
         string DropBoxInfo();
         List<Folder> ListFolder(string path);

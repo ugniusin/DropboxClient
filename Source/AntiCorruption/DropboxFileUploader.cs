@@ -18,7 +18,7 @@ namespace Project.Source.AntiCorruption
         {
             using (var mem = new MemoryStream(content))
             {
-                var updated = await _dropboxClient.Files.UploadAsync(
+                await _dropboxClient.Files.UploadAsync(
                     folder + "/" + file,
                     WriteMode.Overwrite.Instance,
                     body: mem
