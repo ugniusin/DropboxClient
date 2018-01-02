@@ -15,7 +15,7 @@ namespace Project.Controllers
         }
         
         [HttpPost]
-        public IActionResult UploadFile(IFormFile file)
+        public IActionResult UploadFile(string uploadPath, IFormFile file)
         {
             if (file.Length > 0)
             {
@@ -24,7 +24,7 @@ namespace Project.Controllers
                     file.CopyTo(ms);
                     byte[] fileBytes = ms.ToArray();
                         
-                    _fileManager.Upload("", file.FileName, fileBytes);
+                    _fileManager.Upload(uploadPath ?? "", file.FileName, fileBytes);
                 }
             }
             

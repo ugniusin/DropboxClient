@@ -5,48 +5,48 @@
         var url = '/Home/ListFoldersAndFiles';
 
         getFileSystem("", url, function (response) {
-            var list = generateListHtml(response, 1);
+            var list = generateListHtmlForFileSystem(response, 1);
             tree.html("<ul>" + list + "</ul>");
         }, function () {});
 
-        letToOpenFolder(tree, url);
+        letToOpenFileSystemFolder(tree, url);
     }
 });
 
-/*function openFolder(tree, folderElement, icon) {
+function openFileSystemFolder(tree, folderElement, icon, url) {
     tree.off('click', '.folder-node');
-   
+
     var destinationPath = folderElement.data("path") + '/' + folderElement.data("title");
 
     if (icon.data('status') === 'closed') {
         icon.data('status', 'opened');
         icon.addClass('glyphicon-folder-open').removeClass('glyphicon-folder-close');
 
-        getFileSystem(destinationPath, function (response) {
+        getFileSystem(destinationPath, url, function (response) {
             //drawTree(response);
-            var list = generateListHtml(response, folderElement.data("depth") + 1);
+            var list = generateListHtmlForFileSystem(response, folderElement.data("depth") + 1);
             folderElement.after(list);
         }, function () {
-            letToOpenFolder(tree);
+            letToOpenFileSystemFolder(tree, url);
         });
     } else if (icon.data('status') === 'opened') {
         icon.data('status', 'closed');
         icon.addClass('glyphicon-folder-close').removeClass('glyphicon-folder-open');
         $('li[data-path^="' + destinationPath + '"]').remove();
 
-        letToOpenFolder(tree);
+        letToOpenFileSystemFolder(tree, url);
     }
 }
 
-function letToOpenFolder(tree) {
+function letToOpenFileSystemFolder(tree, url) {
     tree.on('click', '.folder-node', function () {
         var folderElement = $(this).closest('li');
         var icon = $(this);
-        openFolder(tree, folderElement, icon);
+        openFileSystemFolder(tree, folderElement, icon, url);
     });
 }
 
-function generateListHtml(response, depth)
+function generateListHtmlForFileSystem(response, depth)
 {
     var list = '';
     var padding = depth * '20';
@@ -64,7 +64,7 @@ function generateListHtml(response, depth)
         } else {
             list += '<div class="file-node glyphicon" style="width: ' + padding + 'px;"></div>';
         }
-        
+
         list += '<span class="icon node-icon"></span>' + object.title;
 
         if (object.type === 'file') {
@@ -76,19 +76,4 @@ function generateListHtml(response, depth)
     });
 
     return list;
-}*/
-
-// function getFileSystem(path, drawTree, letToOpenFolder) {
-//     $.ajax({
-//         url: '/Home/ListFoldersAndFiles',
-//         method: 'post',
-//         data: { path : path },
-//         dataType: 'json',
-//         success: function (data) {
-//             drawTree(data);
-//         },
-//         complete: function(tree) {
-//             letToOpenFolder(tree);
-//         }
-//     });
-// }
+}
