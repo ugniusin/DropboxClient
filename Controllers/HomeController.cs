@@ -48,6 +48,13 @@ namespace Project.Controllers
            
             return Json(result);
         }
+        
+        public JsonResult ListFolders(string path)
+        {
+            List<Folder> folders = _dataProvider.ListFolder(path ?? "");
+           
+            return Json(folders);
+        }
 
         public IActionResult Error()
         {

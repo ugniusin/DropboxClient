@@ -1,40 +1,19 @@
 ﻿$(function() {
-    Dropzone.options.fileUploadForm = {
-        autoProcessQueue: false,
-        maxFilesize: 5,
-        addRemoveLinks: true,
-        parallelUploads: 5,
-        init:function(){
-            var self = this;
-
-            self.options.addRemoveLinks = true;
-            self.options.dictRemoveFile = 'Remove';
-
-            self.on('addedfile', function (file) {
-            });
-
-            self.on('sending', function (file) {
-                $('.meter').show();
-            });
-
-            var submitButton = document.querySelector('#upload-button');
-            submitButton.addEventListener('click', function () {
-                self.processQueue();
-            });
-        }
-    };
-    
     var tree = $('#tree');
     
-    getFileSystem("", function (response) {
-        var list = generateListHtml(response, 1);
-        tree.html("<ul>" + list + "</ul>");
-    }, function () {});
+    if (tree.length) {
+        var url = '/Home/ListFoldersAndFiles';
 
-    letToOpenFolder(tree);
+        getFileSystem("", url, function (response) {
+            var list = generateListHtml(response, 1);
+            tree.html("<ul>" + list + "</ul>");
+        }, function () {});
+
+        letToOpenFolder(tree, url);
+    }
 });
 
-function openFolder(tree, folderElement, icon) {
+/*function openFolder(tree, folderElement, icon) {
     tree.off('click', '.folder-node');
    
     var destinationPath = folderElement.data("path") + '/' + folderElement.data("title");
@@ -97,38 +76,19 @@ function generateListHtml(response, depth)
     });
 
     return list;
-}
+}*/
 
-function makeTree(tree, response) {
-    
-    $.each(response, function(key, object) {
-        if (object.type === 'file') {
-            tree.push({
-                text: object.title
-            });
-        } else if (object.type === 'folder') {
-            tree.push({
-                text: object.title,
-                nodes: makeTree([], object.items)
-            });
-        }
-    });
-    
-    return tree;
-}
-
-function getFileSystem(path, drawTree, letToOpenFolder) {
-
-    $.ajax({
-        url: '/Home/ListFoldersAndFiles',
-        method: 'post',
-        data: { path : path },
-        dataType: 'json',
-        success: function (data) {
-            drawTree(data);
-        },
-        complete: function(tree) {
-            letToOpenFolder(tree);
-        }
-    });
-}
+// function getFileSystem(path, drawTree, letToOpenFolder) {
+//     $.ajax({
+//         url: '/Home/ListFoldersAndFiles',
+//         method: 'post',
+//         data: { path : path },
+//         dataType: 'json',
+//         success: function (data) {
+//             drawTree(data);
+//         },
+//         complete: function(tree) {
+//             letToOpenFolder(tree);
+//         }
+//     });
+// }
