@@ -34,7 +34,13 @@ function getFileSystem(path, url, drawTree, letToOpenFolder) {
         data: { path : path },
         dataType: 'json',
         success: function (data) {
-            drawTree(data);
+            if (data.hasOwnProperty('error')) {
+                $('#folder-tree').html(
+                    '<br><div class="alert alert-danger"><strong>Error! </strong>' + data.error +'</div>'
+                );
+            } else {
+                drawTree(data);
+            }
         },
         complete: function(tree) {
             letToOpenFolder(tree);

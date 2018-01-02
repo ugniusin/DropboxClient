@@ -39,6 +39,14 @@
         </div>
     </nav>
     <div class="container body-content">
+        @{
+            if (@ViewData["ErrorMessage"] != null) {
+                <br>
+                <div class="alert alert-danger">
+                    <strong>Error! </strong> @ViewData["ErrorMessage"]
+                </div>
+            }
+        }
         @RenderBody()
         <hr />
         <footer>

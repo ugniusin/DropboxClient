@@ -15,15 +15,14 @@ namespace Project.Source.Infrastructure
             _dropboxDataProvider = dropboxDataProvider;
         }
 
-        public string DropBoxInfo()
+        public string Name()
         {
-            try {
-                return _dropboxDataProvider.DropBoxInfo().Result;
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
+            return _dropboxDataProvider.Name().Result;
+        }
+
+        public string Email()
+        {
+            return _dropboxDataProvider.Email().Result;
         }
 
         public List<Folder> ListFolder(string path)

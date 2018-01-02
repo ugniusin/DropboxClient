@@ -15,10 +15,16 @@ namespace Project.Source.AntiCorruption
             _dropboxClient = dropboxClient;
         }
         
-        public async Task<string> DropBoxInfo()
+        public async Task<string> Name()
         {
             var full = await _dropboxClient.Users.GetCurrentAccountAsync();
-            return full.Name.DisplayName + full.Email;
+            return full.Name.DisplayName;
+        }
+        
+        public async Task<string> Email()
+        {
+            var full = await _dropboxClient.Users.GetCurrentAccountAsync();
+            return full.Email;
         }
         
         public async Task<List<Folder>> ListFolder(string path)

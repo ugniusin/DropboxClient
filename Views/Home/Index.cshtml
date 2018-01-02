@@ -3,4 +3,10 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+
+This is a Dropbox client with which you can upload and/or download files.
+<br>
+Select <a asp-area="" asp-controller="Home" asp-action="FileUpload">File upload</a> or <a asp-area="" asp-controller="Home" asp-action="FileUpload">Files</a> to proceed.
+<br><br>
+<b>Connected to:</b>
+<h4>@ViewData["Email"] <small>@ViewData["Name"]</small></h4>

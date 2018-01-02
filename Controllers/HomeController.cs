@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Project.Models;
 using Project.Source.Application.DTO;
 using Project.Source.Domain;
 
@@ -18,7 +17,14 @@ namespace Project.Controllers
         }
 
         public IActionResult Index()
-        {
+        {   
+            try {
+                ViewData["Name"] = _dataProvider.Name();
+                ViewData["Email"] = _dataProvider.Email();
+            } catch (Exception e) {
+                ViewData["ErrorMessage"] = e.Message;
+            }
+            
             return View();
         }
         
@@ -30,35 +36,41 @@ namespace Project.Controllers
         
         [Route("Files")]
         public IActionResult Files()
-        {   
-            ViewData["Message"] = "Your application description page.";
-            ViewData["Folders"] =  _dataProvider.ListFolder("");
-            ViewData["Files"] =  _dataProvider.ListFiles("");
-            
+        {
+            try {
+                ViewData["Folders"] = _dataProvider.ListFolder("");
+                ViewData["Files"] = _dataProvider.ListFiles("");
+            } catch (Exception e) {
+                ViewData["ErrorMessage"] = e.Message;
+            }
+
             return View();
         }
         
         public JsonResult ListFoldersAndFiles(string path)
         {
-            List<Folder> folders = _dataProvider.ListFolder(path ?? "");
-            List<File> files = _dataProvider.ListFiles(path ?? "");
-            List<IFileSystemNode> result = folders.Concat<IFileSystemNode>(files).ToList();
-            
-            result.Sort((x, y) => x.GetTitle().CompareTo(y.GetTitle()));
-           
-            return Json(result);
+            try {
+                List<Folder> folders = _dataProvider.ListFolder(path ?? "");
+                List<File> files = _dataProvider.ListFiles(path ?? "");
+                List<IFileSystemNode> result = folders.Concat<IFileSystemNode>(files).ToList();
+
+                result.Sort((x, y) => x.GetTitle().CompareTo(y.GetTitle()));
+                
+                return Json(result);
+            } catch (Exception e) {
+                return Json(new { Error = e });
+            }
         }
         
         public JsonResult ListFolders(string path)
         {
-            List<Folder> folders = _dataProvider.ListFolder(path ?? "");
-           
-            return Json(folders);
-        }
+            try {
+                List<Folder> folders = _dataProvider.ListFolder(path ?? "");
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return Json(folders);
+            } catch (Exception e) {
+                return Json(new {error = e.Message});
+            }
         }
     }
 }
